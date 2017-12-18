@@ -1,0 +1,14 @@
+{
+
+  "appName": "get-tfl-travel-options-test",
+
+  "connectionTimeout": 100,
+
+  "log" : {
+    "level": "ERROR",
+    "log4jsConfigs": {
+      "replaceConsole": false
+    }
+  }
+
+}

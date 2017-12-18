@@ -1,0 +1,19 @@
+[Unit]
+Description=get-tfl-travel-options
+
+[Service]
+ExecStart=/usr/bin/node /var/www/get-tfl-travel-options/bin/www
+Restart=always
+RestartSec=10
+User=pi
+# Note RHEL/Fedora uses 'nobody', Debian/Ubuntu uses 'nogroup'
+Group=nogroup  
+Environment=PATH=/usr/bin:/usr/local/bin
+Environment=PATH=${PATH}:/usr/lib/node_modules:/usr/lib/nodejs:/usr/share/javascript
+WorkingDirectory=/var/www/get-tfl-travel-options
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=get-tfl-travel-options
+
+[Install]
+WantedBy=multi-user.target
