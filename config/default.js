@@ -5,7 +5,7 @@ module.exports = {
 
   appName: "get-tfl-travel-options",
 
-  darwinKey "OVERRIDE_ME".
+  darwinKey: "OVERRIDE_ME",
 
   log: {
     appName: defer(function (cfg) { return cfg.appName } ),
@@ -25,7 +25,7 @@ module.exports = {
   },
 
 
-  tflStops : [
+  tflStops: [
     {
       name          : "Fiction bus stop",
       naptanId      : "123456",
@@ -33,10 +33,11 @@ module.exports = {
       walkingTime   : "1"
     },
     {
-      name          : "Fiction tram stop"
+      name          : "Fiction tram stop",
       naptanId      : "789101112",
       platformNames : ["Westbound Platform"],
       vehicleType   : "Tram",
       walkingTime   : "10"
     }
+  ]
 }
