@@ -54,9 +54,9 @@ describe('TflStop.loadArrivals', function () {
 
     tflStop.loadArrivals(null, function (e,arrivals) {
       arrivals.should.deep.equal([
-        {timeToArrival: 733},
-        {timeToArrival: 793},
-        {timeToArrival: 1693}
+        {timeToArrival: 733  , vehicleId: "2547"},
+        {timeToArrival: 793  , vehicleId: "2542"},
+        {timeToArrival: 1693 , vehicleId: "2533"}
       ])
       done();
     })
