@@ -5,7 +5,7 @@
   "connectionTimeout": 100,
 
   "log" : {
-    "level": "ERROR",
+    "level": "INFO",
     "log4jsConfigs": {
       "replaceConsole": false
     }
