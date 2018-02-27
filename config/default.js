@@ -25,14 +25,23 @@ module.exports = {
   },
 
 
-  tflStops: [
+  stops: [
     {
+      infoService   : "tfl",
       name          : "Fiction bus stop",
       naptanId      : "123456",
       vehicleType   : "Bus",
       walkingTime   : "1"
     },
     {
+      infoService   : "train",
+      name          : "Fiction train station",
+      id            : "ABC",
+      destination   : "DEF",
+      walkingTime   : "5"
+    },
+    {
+      infoService   : "tfl",
       name          : "Fiction tram stop",
       naptanId      : "789101112",
       platformNames : ["Westbound Platform"],
