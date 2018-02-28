@@ -5,7 +5,6 @@ var router    = express.Router();
 var TflStop   = require('../lib/TflStop.js');
 var TrainStop = require('../lib/TrainStop.js');
 var Q         = require('q');
-require('q-foreach')(Q);
 
 
 /*
@@ -17,7 +16,6 @@ var log = log4js.getLogger(cfg.log.appName);
 log.setLevel(cfg.log.level);
 
 
-
 var stops = []
 
 for (var i = 0; i < cfg.stops.length; i++) {
@@ -25,25 +23,28 @@ for (var i = 0; i < cfg.stops.length; i++) {
   var stop = cfg.stops[i]
 
   if (stop.infoService == "tfl") {
-    stops.push(new TflStop (stop))
+    stops.push(new TflStop(stop))
   } else if (stop.infoService == "train") {
-    stops.push(new TrainStop (stop))
+    stops.push(new TrainStop(stop))
   }
-
 }
 
 
-/* GET tfl transport options */
+/* GET all transport options */
 router.get('/', function(req, res, next) {
 
   log.info('transportOptions BEGIN.')
+  var startTime = new Date()
 
-  Q.forEach(stops, function(stop) {
+  var qJobs = []
 
+  stops.forEach( function (stop, s) {
     var getArrivals = Q.nbind(stop.getArrivals, stop)
-    return Q.nfcall(getArrivals, null)
+    qJobs.push(Q.nfcall(getArrivals, null))
+  })
 
-  }).then (function (stops) {
+  Q.allSettled(qJobs)
+  .then (function (stopPromises) {
 
     var ret = ""
 
@@ -60,6 +61,10 @@ router.get('/', function(req, res, next) {
     log.error('transportOptions got error: ' + err)
     res.status(503)
   }).done(function () {
+    var endTime = new Date()
+
+    var serviceTime = ((endTime.getTime() - startTime.getTime()) / 1000)
+    log.info('Request served in %ss.', serviceTime)
     log.info('transportOptions END.')
   })
   
